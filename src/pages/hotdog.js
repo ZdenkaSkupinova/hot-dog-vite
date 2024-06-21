@@ -11,35 +11,28 @@ export const toppings = [
   ];
 
   export const toggleTopping = (index) => {
-    toppings = document.querySelectorAll(".topping") 
-      toppings.forEach((topping) => {
-        if(topping.selected === true) {
-          topping[index].selected.classList.toggle("topping--selected")
-        } else {
-          topping[index].selected.classList.toggle(".topping")
-        }
-      })
-    }
+    toppings[index].selected = !toppings[index].selected
+  }
+  
 
-    
   export const renderToppings = () => {
     const toppingsElement = document.querySelector('#toppings');
     toppingsElement.innerHTML = '';
-    toppings.forEach((toppings) => {
-
-     
-  // podmínka if selected === true class = topping--selected a false = selected
-    toppingsElement.innerHTML += `
-        <div class="topping" class="topping--selected">
-          <h3>${toppings.name}</h3>
-          <p>${toppings.price}</p>
+    toppings.forEach((topping) => {
+      toppingsElement.innerHTML += `
+        <div class="topping ${topping.selected ? 'topping--selected' : ''}">
+          <h3>${topping.name}</h3>
+          <p>${topping.price}</p>
         </div>
       `;
-    })
-  
-  const toppingSelected = document.querySelectorAll('.topping--selected');
-  toppingSelected.forEach((topping) => {
-  topping.addEventListener("click", toggleTopping) 
-  renderToppings()  
- })
-}
+    });
+  };
+
+  const topping = document.querySelectorAll('.topping');
+  topping.forEach((topping, index) => {
+    topping.addEventListener('click', () => {
+      toggleTopping(index); 
+      renderToppings(); 
+    });
+  });
+
