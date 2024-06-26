@@ -25,14 +25,13 @@ export const toppings = [
           <p>${topping.price}</p>
         </div>
       `;
+     topping = document.querySelectorAll('.topping');
+      topping.forEach((topping, index) => {
+        topping.addEventListener('click', () => {
+          toggleTopping(index); 
+          renderToppings(); 
+        });
+      });
     });
   };
-
-  const topping = document.querySelectorAll('.topping');
-  topping.forEach((topping, index) => {
-    topping.addEventListener('click', () => {
-      toggleTopping(index); 
-      renderToppings(); 
-    });
-  });
 
